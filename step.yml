@@ -10,9 +10,24 @@
 title: |-
   JaCoCo Report Parser
 summary: |
-  Parses a JaCoCo generated report and outputs the code coverage percentages to be used by other steps.
+  Parse a JaCoCo generated report and output the code coverage percentages to be used by other steps.
 description: |
-  Fill description with what step does, services and tools used, configuration info, inputs, and troubleshooting.
+  This step parses a JaCoCo generated XML report in the `jacoco_report_path` and outputs the coverage
+  percentages in a String format to environment / output variables to be used in other steps.
+
+  It basically gets the top-level counter information for each coverage type and calculates de percentage
+  by doing `covered` / `covered` + `missed`.
+
+  Input:
+  `jacoco_report_path` receives the reported file path (it must be an xml)
+  
+  Outputs:
+  `JACOCO_INSTRUCTION_COVERAGE` contains the instruction coverage percentage calculated from the report
+  `JACOCO_BRANCH_COVERAGE` contains the branch coverage percentage calculated from the report
+  `JACOCO_LINE_COVERAGE` contains the line coverage percentage calculated from the report
+  `JACOCO_COMPLEXITY_COVERAGE` contains the complexity coverage percentage calculated from the report
+  `JACOCO_METHOD_COVERAGE` contains the method coverage percentage calculated from the report
+  `JACOCO_CLASS_COVERAGE` contains the class coverage percentage calculated from the report
 website: https://github.com/thomashorta/bitrise-step-jacoco-report-parser
 source_code_url: https://github.com/thomashorta/bitrise-step-jacoco-report-parser
 support_url: https://github.com/thomashorta/bitrise-step-jacoco-report-parser/issues
@@ -29,25 +44,24 @@ host_os_tags:
 # You can find more information about project type tags in the Step Development Guideline:
 # https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
 #
-# project_type_tags:
-#   - ios
-#   - macos
-#   - android
-#   - xamarin
-#   - react-native
-#   - cordova
-#   - ionic
+project_type_tags:
+  - android
+  - xamarin
+  - react-native
+  - cordova
+  - ionic
+  - flutter
 
 # Type tags are used for categorizing steps, for easier step discovery in Step Libraries.
 # You can find more information about type tags in the Step Development Guideline:
 # https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
 type_tags:
   - test
+  - utility
 
-is_requires_admin_user: true
+is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
-run_if: ""
 
 deps:
   brew:
@@ -64,24 +78,74 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - jacoco_report_path: $BITRISE_SOURCE_DIR/build/reports/jacoco.xml
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
-      is_expand: true
       is_required: true
-      value_options: []
+      title: "The JaCoCo report file path"
+      summary: Exact path location to the JaCoCo report file (usually points to a jacoco.xml file).
+      description: |
+        The report will be parsed from this input to run this step.
+
+        Default value: `$BITRISE_SOURCE_DIR/build/reports/jacoco.xml`
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - JACOCO_INSTRUCTION_COVERAGE:
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
+      title: "Instruction coverage percentage"
+      summary: Total instruction coverage percentage parsed from the report.
       description: |
-        Description of this output.
+        This is the total instruciton coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
 
-        Can be Markdown formatted text.
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
+  - JACOCO_BRANCH_COVERAGE:
+    opts:
+      title: "Branch coverage percentage"
+      summary: Total branch coverage percentage parsed from the report.
+      description: |
+        This is the total branch coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
+
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
+  - JACOCO_LINE_COVERAGE:
+    opts:
+      title: "Line coverage percentage"
+      summary: Total line coverage percentage parsed from the report.
+      description: |
+        This is the total line coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
+
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
+  - JACOCO_COMPLEXITY_COVERAGE:
+    opts:
+      title: "Complexity coverage percentage"
+      summary: Total complexity coverage percentage parsed from the report.
+      description: |
+        This is the total complexity coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
+
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
+  - JACOCO_METHOD_COVERAGE:
+    opts:
+      title: "Method coverage percentage"
+      summary: Total method coverage percentage parsed from the report.
+      description: |
+        This is the total method coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
+
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
+  - JACOCO_CLASS_COVERAGE:
+    opts:
+      title: "Class coverage percentage"
+      summary: Total class coverage percentage parsed from the report.
+      description: |
+        This is the total class coverage percentage parsed from the report
+        taking into consideration the report summary for the whole run.
+
+        This is calculated by taking the `covered` amount divided by the `covered` + `missed` amount.
+        It returns "N/A" if the coverage information was not found.
