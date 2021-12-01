@@ -5,15 +5,17 @@ This step parses a JaCoCo generated XML report in the `jacoco_report_path` and o
 It basically gets the top-level counter information for each coverage type and calculates de percentage by doing `covered` / `covered` + `missed`.
 
 Input:
-`jacoco_report_path` receives the reported file path (it must be an xml)
+
+- `jacoco_report_path` receives the reported file path (it must be an xml)
 
 Outputs:
-`JACOCO_INSTRUCTION_COVERAGE` contains the instruction coverage percentage calculated from the report
-`JACOCO_BRANCH_COVERAGE` contains the branch coverage percentage calculated from the report
-`JACOCO_LINE_COVERAGE` contains the line coverage percentage calculated from the report
-`JACOCO_COMPLEXITY_COVERAGE` contains the complexity coverage percentage calculated from the report
-`JACOCO_METHOD_COVERAGE` contains the method coverage percentage calculated from the report
-`JACOCO_CLASS_COVERAGE` contains the class coverage percentage calculated from the report
+
+- `JACOCO_INSTRUCTION_COVERAGE` contains the instruction coverage percentage calculated from the report
+- `JACOCO_BRANCH_COVERAGE` contains the branch coverage percentage calculated from the report
+- `JACOCO_LINE_COVERAGE` contains the line coverage percentage calculated from the report
+- `JACOCO_COMPLEXITY_COVERAGE` contains the complexity coverage percentage calculated from the report
+- `JACOCO_METHOD_COVERAGE` contains the method coverage percentage calculated from the report
+- `JACOCO_CLASS_COVERAGE` contains the class coverage percentage calculated from the report
 
 
 ## How to use this Step
