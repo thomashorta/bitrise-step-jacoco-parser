@@ -6,7 +6,7 @@ app:
   # If you want to share this step into a StepLib
   - BITRISE_STEP_ID: jacoco-report-parser
   - BITRISE_STEP_VERSION: "1.0.0"
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/thomashorta/bitrise-step-jacoco-report-parser.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/thomashorta/bitrise-step-jacoco-parser.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 
 workflows:

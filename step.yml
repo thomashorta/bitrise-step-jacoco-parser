@@ -28,9 +28,9 @@ description: |
   `JACOCO_COMPLEXITY_COVERAGE` contains the complexity coverage percentage calculated from the report
   `JACOCO_METHOD_COVERAGE` contains the method coverage percentage calculated from the report
   `JACOCO_CLASS_COVERAGE` contains the class coverage percentage calculated from the report
-website: https://github.com/thomashorta/bitrise-step-jacoco-report-parser
-source_code_url: https://github.com/thomashorta/bitrise-step-jacoco-report-parser
-support_url: https://github.com/thomashorta/bitrise-step-jacoco-report-parser/issues
+website: https://github.com/thomashorta/bitrise-step-jacoco-parser
+source_code_url: https://github.com/thomashorta/bitrise-step-jacoco-parser
+support_url: https://github.com/thomashorta/bitrise-step-jacoco-parser/issues
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -74,7 +74,7 @@ deps:
 
 toolkit:
   go:
-    package_name: github.com/thomashorta/bitrise-step-jacoco-report-parser
+    package_name: github.com/thomashorta/bitrise-step-jacoco-parser
 
 
 inputs:
