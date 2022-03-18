@@ -61,7 +61,7 @@ func main() {
 	xmlFile, err := os.Open(reportPath)
 
 	if err != nil {
-		fmt.Printf("Failed to open specified file %s\n", reportPath)
+		fmt.Printf("Failed to open specified file %s: %s\n", reportPath, err)
 		os.Exit(1)
 	}
 
@@ -121,7 +121,7 @@ func SetOutput(key string, value string) {
 	fmt.Printf("Outputing key %s with value %s\n", key, value)
 	cmdLog, err := exec.Command("bitrise", "envman", "add", "--key", key, "--value", value).CombinedOutput()
 	if err != nil {
-		fmt.Printf("Failed to expose output with envman, error: %#v | output: %s\n", err, cmdLog)
+		fmt.Printf("Failed to expose output with envman, error: %s | output: %s\n", err, cmdLog)
 		os.Exit(1)
 	}
 }
